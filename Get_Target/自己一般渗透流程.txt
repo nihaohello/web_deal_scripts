@@ -1,0 +1,54 @@
+1.
+钟馗之眼  找特殊的cms
+
+2.
+layer  扫子域名
+
+3.
+whatweb处理子域名
+whatweb -i urls.txt
+whatweb -i urls.txt | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" | tee whatweb_urls.txt
+
+
+4.
+直接layer的ip或者挑选出来的ip
+nmap -sV -Pn -v ip,ip,ip
+nikto -h ip
+参考：https://www.cnblogs.com/weihua2616/p/6599629.html
+nmap -sS -F -T4 -v -iL nmap_ips.txt | tee nmap_results.txt   -F是只扫描100个端口
+nmap -sS -T4 -v --script=vuln -iL nmap_ips.txt | tee nmap_results.txt
+
+
+5.
+dirb_scan.py扫描一些有趣的目录
+
+
+
+第二部分：
+6.
+扫描的空闲时间：
+google  后台  txt   pdf 。。。。
+bugscan 云溪在线识别下
+参考：
+https://www.hnwlaq.cn//
+http://www.0xby.com/g.html
+https://www.exploit-db.com/google-hacking-database
+https://pentest-tools.com/information-gathering/google-hacking
+
+
+7.
+大众化的结束后：
+正式：
+dirb  御剑 爆破目录
+hydra脚本爆破端口
+burp  sqli插件
+xss手工   xssstrike工具
+抓包改包进行逻辑漏洞
+商城：支付  用户名登陆
+登陆接口的一些非常规测试，已经post数据的一些情况
+
+
+8.
+最后：
+fofa  子域名补漏
+很有价值，遍历字典子域名补漏
