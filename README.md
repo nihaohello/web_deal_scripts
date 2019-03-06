@@ -17,9 +17,9 @@ Get_Target目录中的：
 1.先用一些子域名收集器收集一些子域名，保存在urls.txt  
 2.然后用whatweb工具进行筛选：whatweb -i urls.txt | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" | tee whatweb_urls.txt  
 3.dirb_scan_from_whatweb.py  提取http://www.baidu.com这样的网址出来，保存到dirb_urls.txt中  
-4.用dirb_scan.py进行扫描（其中，个人只收集了4700个在dirb_wordlist.txt中），将结果保存在diab_catlog目录里
-其中dirb_scan.py是调用dirb进行扫描
-dirb_scan2.py是个人写的脚本进行扫描目录
+4.用dirb_scan.py进行扫描（其中，个人只收集了4700个在dirb_wordlist.txt中），将结果保存在diab_catlog目录里  
+其中dirb_scan.py是调用dirb进行扫描  
+dirb_scan2.py是个人写的脚本进行扫描目录  
 5.用get_nmap_from_whatweb.py   取得nmap要扫描的ip地址，保存到nmap_ips.txt中  
 6.然后用：  
 nmap -sV -Pn -v ip,ip,ip  
@@ -39,6 +39,6 @@ apache再看语言，jsp，php进行等等等操作
 
 
 ------------------------------------
-完善了简单的dirb目录扫描
+完善了简单的dirb目录扫描  
 
 2019.3.6
