@@ -1,9 +1,9 @@
 # web_deal_scripts  
+下载链接：https://github.com/nihaohello/web_deal_scripts
 
 这几个脚本的目的：  
 主要是有一些工作太繁琐重复，就写点脚本，把前面的一些操作一起做了  
 其中Get_Target中个人渗透流程和大纲把思路说了些  
-
 
 
 Get_Target目录中的：  

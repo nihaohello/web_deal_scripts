@@ -3,6 +3,7 @@
 
 2.
 layer  扫子域名
+http://47.106.140.244/domain.php
 
 3.
 whatweb处理子域名
@@ -21,6 +22,7 @@ nmap -sS -T4 -v --script=vuln -iL nmap_ips.txt | tee nmap_results.txt
 
 5.
 dirb_scan.py扫描一些有趣的目录
+自己写脚本测试  dirb_scan2.py
 
 
 
@@ -28,21 +30,26 @@ dirb_scan.py扫描一些有趣的目录
 6.
 扫描的空闲时间：
 google  后台  txt   pdf 。。。。
+http://47.106.140.244/g.html
 bugscan 云溪在线识别下
-参考：
 https://www.hnwlaq.cn//
 http://www.0xby.com/g.html
 https://www.exploit-db.com/google-hacking-database
 https://pentest-tools.com/information-gathering/google-hacking
 
 
+
 7.
 大众化的结束后：
 正式：
 dirb  御剑 爆破目录
-hydra脚本爆破端口
+hydra脚本爆破端口  hydra_broken_script.py
 burp  sqli插件
 xss手工   xssstrike工具
+
+
+
+8.
 抓包改包进行逻辑漏洞
 商城：支付  用户名登陆
 登陆接口的一些非常规测试，已经post数据的一些情况
@@ -52,3 +59,7 @@ xss手工   xssstrike工具
 最后：
 fofa  子域名补漏
 很有价值，遍历字典子域名补漏
+
+
+
+

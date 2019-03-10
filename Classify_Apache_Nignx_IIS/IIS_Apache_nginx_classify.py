@@ -1,5 +1,9 @@
 #coding=utf-8
-f=open("temp.txt")
+import os
+d=os.path.dirname(__file__)
+base_file=os.path.dirname(d)
+f=open(base_file+"/temp.txt",encoding="utf-8")
+print(f)
 urls=[]
 urls1=[]
 urls2=[]
@@ -23,10 +27,9 @@ with open("Apache_urls.txt","w") as f:
         f.write(i)
         f.write("\n")
 f.close()
-with open("IIS_AND_Nginx_urls.txt","w") as f:
+with open("IIS_AND_Nginx_urls.txt","w",encoding="utf-8") as f:
     for i in urls2:
         f.write(i)
         f.write("\n")
 f.close()
-
 
