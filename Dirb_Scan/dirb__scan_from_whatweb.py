@@ -1,9 +1,11 @@
 #coding=utf-8
 import re
 import sys
-f=open("temp.txt")
+import os
+d=os.path.dirname(__file__)
+base_file=os.path.dirname(d)
+f=open(base_file+"/temp.txt",encoding="utf-8")
 urls=[]
-wordlist="/root/dict/web/wordlist1.txt"
 for i in f.readlines():
     i=i.rstrip("\n")
     i=i.split(" ")[0]

